@@ -1,33 +1,34 @@
 import 'package:mongo_dart/mongo_dart.dart';
+import 'dart:convert';
 
-class User {
-  ObjectId? id;
-  late String username;
-  late String email;
-  late String address;
+MongoDbModel mongoDbModelFromJson(String str) =>
+    MongoDbModel.fromJson(json.decode(str));
 
-  User(this.username, this.email, this.address);
+class MongoDbModel {
+  MongoDbModel({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.address,
+});
+  ObjectId id;
+  String firstName;
+  String lastName;
+  String address;
 
-  User.fromJson(Map<String, dynamic> json)
-      : id = json['_id'] != null ? ObjectId.parse(json['_id']) : null,
-        username = json['username'],
-        email = json['email'],
-        address = json['address'];
+  factory MongoDbModel.fromJson(Map<String, dynamic> json) => MongoDbModel(
+      id: json['_id'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      address: json['address'],
+  );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {
-      'username': username,
-      'email': email,
-      'address': address,
-    };
-    if (id != null) {
-      data['_id'] = id!.toJson();
-    }
-    return data;
+  Map<String, dynamic> toJson()=> {
+      '_id' = id,
+      'firstName' = firstName,
+      'lastName' = lastName,
+      'address' = address,
+  };
+
   }
 
-  @override
-  String toString() {
-    return 'User{id: $id, username: $username, email: $email, address: $address}';
-  }
-}
