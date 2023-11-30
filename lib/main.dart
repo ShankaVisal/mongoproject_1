@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mongoproject_1/display.dart';
 import 'package:mongoproject_1/insert.dart';
 import 'dbHelper/mongodb.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await mongoDatabase.connect();
+  await MongoDatabase.connect();
   runApp(const MyApp());
 }
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MongoDbInsert(),
+      home: const MongoDbDisplay(),
     );
   }
 }

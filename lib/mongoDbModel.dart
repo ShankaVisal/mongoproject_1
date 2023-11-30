@@ -23,12 +23,11 @@ class MongoDbModel {
       address: json['address'],
   );
 
-  Map<String, dynamic> toJson()=> {
-      '_id' = id,
-      'firstName' = firstName,
-      'lastName' = lastName,
-      'address' = address,
+  Map<String, dynamic> toJson() => {
+    '_id': id,
+    'firstName': firstName,
+    'lastName': lastName,
+    'address': address,
   };
-
-  }
+}
 
