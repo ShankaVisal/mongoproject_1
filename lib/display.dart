@@ -12,7 +12,23 @@ class _MongoDbDisplayState extends State<MongoDbDisplay> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Text('Hello world')
+          child: FutureBuilder(builder: (context,AsyncSnapshot snapshot){
+                if(snapshot.connectionState == ConnectionState.waiting){
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  if(snapshot.hasData){
+                    var totalData = snapshot.data.length;
+                    print('Total Data');
+                    return Text('Data found');
+                  } else {
+                    return Center(
+                      child: Text("No Data Available"),
+                    );
+                  }
+                }
+          })
       ),
     );
   }
